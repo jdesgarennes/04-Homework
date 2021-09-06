@@ -24,7 +24,6 @@ var quizquestions = [
 
 
 
-
 console.log(quizquestions[1].question);
 
 
@@ -34,7 +33,8 @@ var curentQuestion =0;
 function beginGame () {
 var questions = quizquestions[curentQuestion];
 var qTitle = document.createElement("h1");
-qTitle.textContent= questions.question
+qTitle.textContent= questions.question;
+questionsConainer.appendChild(qTitle
  
 
 

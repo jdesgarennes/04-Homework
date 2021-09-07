@@ -4,8 +4,8 @@ var BeginGameButton = document.querySelector("#start");
 var resultsContainer = document.querySelector('#result-box');
 var score =0;
 var removeTime = 0;
-
-// Creste a array of objexts that contain all possible questions with awnser Keys.
+var timeClock =document.querySelector('#timer');
+// Create a array of objexts that contain all possible questions with awnser Keys.
 var quizquestions = [
     {
         question: "Question ONE: What Does HTML stand for?",
@@ -54,7 +54,7 @@ var quizquestions = [
     },
     {
         question: "Question TEN: What does IMMUTABLE mean",
-        answers: ["A: Makes answers un readable", "B: Means it cannot be changed", "C: Makes others work more tollerable.", "D: Allows you to change values."],
+        answers: ["A: Makes answers un readable", "B: Means it cannot be changed", "C: Makes others work more tollerable.", "D: Allows you to chnge values."],
         correctAnswer: "B: Means it cannot be changed",
     },
 ];
@@ -67,6 +67,7 @@ function beginGame () {
 // next line clears out text box.    
 questionsConainer.innerHTML = "";
 resultsContainer.innerHTML = "";
+countdown();
 var questions = quizquestions[curentQuestion];
 var qTitle = document.createElement("h1");
 qTitle.textContent= questions.question;
@@ -82,23 +83,56 @@ questionsConainer.appendChild(answersbuttons);
         if(questions.correctAnswer=== this.textContent){
             score++;
             BeginGameButton.innerHTML = "NEXT";
-            resultsContainer.innerHTML = "THAT IS CORRECT!";
+            resultsContainer.innerHTML = "THAT IS CORRECT! YOU NO HAVE  "+score +" CORRECT ANSWERS.";
+            
         }else {
             removeTime-=10;
             BeginGameButton.innerHTML = "NEXT";
             resultsContainer.innerHTML = "THAT IS NOT CORRECT!";
+            
         }
-
-
     })
 
-
+    
 answersbuttons.textContent = questions.answers[i];
 questionsConainer.appendChild(answersbuttons);
 
-// colect choice from click
+
 }
 curentQuestion ++;
 }
 
 BeginGameButton.addEventListener("click",beginGame);
+
+
+
+function endGame(){
+    questionsConainer.innerHTML = "";
+    resultsContainer.innerHTML = "";
+    resultsContainer.innerHTML = "You got "+ score +" correct awnsers.";
+}
+
+function countdown() {
+    var timeLeft = 60;
+  
+    // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+    var timeInterval = setInterval(function () {
+      // As long as the `timeLeft` is greater than 1
+      if (timeLeft > 1) {
+        // Set the `textContent` of `timerEl` to show the remaining seconds
+        timeClock.textContent = timeLeft + ' seconds remaining';
+        // Decrement `timeLeft` by 1
+        timeLeft--;
+      } else if (timeLeft === 1) {
+        // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
+        timeClock.textContent = timeLeft + ' second remaining';
+        timeLeft--;
+      } else {
+        // Once `timeLeft` gets to 0, set `timerEl` to an empty string
+        timeClock.textContent = '';
+        // Use `clearInterval()` to stop the timer
+        clearInterval(timeInterval);
+        
+      }
+    }, 1000);
+  }

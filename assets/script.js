@@ -1,7 +1,9 @@
 
 var questionsConainer = document.querySelector("#questions-box");
 var BeginGameButton = document.querySelector("#start");
-var score =0
+var resultsContainer = document.querySelector('#result-box');
+var score =0;
+var removeTime = 0;
 
 // Creste a array of objexts that contain all possible questions with awnser Keys.
 var quizquestions = [
@@ -20,24 +22,28 @@ var quizquestions = [
         answers: ["A: To make code more difficult.", "B: To make life easier by not repeting long segments of code", "C: To make loops", "D: To run faster"],
         correctAnswer: "B: To make life easier by not repeting long segments of code",
     },
+    {
+        question: "Question Four: What is the purpose of comments?",
+        answers: ["A: To make code more difficult.", "B: To make the program run faster.", "C: To make loops", "D: To make code easier to read."],
+        correctAnswer: "D: To make code easier to read.",
+    },
+
 ];
 
 
 
-
-
-
-
 var curentQuestion =0;
+// The Begin game function that start the game and validates input.
 
 function beginGame () {
 // next line clears out text box.    
 questionsConainer.innerHTML = "";
+resultsContainer.innerHTML = "";
 var questions = quizquestions[curentQuestion];
 var qTitle = document.createElement("h1");
 qTitle.textContent= questions.question;
 questionsConainer.appendChild(qTitle);
-
+// loop to display all questions inarray.
 for (var i = 0; i < questions.answers.length; i++){
 var answersbuttons = document.createElement("button");
 answersbuttons.setAttribute('id','button'+i);
@@ -47,6 +53,12 @@ questionsConainer.appendChild(answersbuttons);
         if(questions.correctAnswer=== this.textContent){
             console.log(true);
             score++;
+            BeginGameButton.innerHTML = "NEXT";
+            resultsContainer.innerHTML = "THAT IS CORRECT!";
+        }else {
+            removeTime-=10;
+            BeginGameButton.innerHTML = "NEXT";
+            resultsContainer.innerHTML = "THAT IS NOT CORRECT!";
         }
 
 

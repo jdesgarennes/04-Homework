@@ -3,14 +3,17 @@ var questionsConainer = document.querySelector("#questions-box");
 var BeginGameButton = document.querySelector("#start");
 var resultsContainer = document.querySelector('#result-box');
 var score =0;
+var timeLeft=60; 
 var removeTime = 0;
+var addTime = 10;
 var timeClock =document.querySelector('#timer');
+
 // Create a array of objexts that contain all possible questions with awnser Keys.
 var quizquestions = [
     {
         question: "Question ONE: What Does HTML stand for?",
-        answers: ["A: How To MarkUp Language","B: Hypertext MarkUP Language", "C: Hold languge", "D: There is no meaning"],
-        correctAnswer: "B: Hypertext MarkUP Language",
+        answers: ["A: How To MarkUp Language. ","B: Hypertext MarkUP Language. ", "C: Hold languge. ", "D: There is no meaning. "],
+        correctAnswer: "B: Hypertext MarkUP Language. ",
     },
     {
         question: "Question TWO: What is javaScript?",
@@ -67,7 +70,6 @@ function beginGame () {
 // next line clears out text box.    
 questionsConainer.innerHTML = "";
 resultsContainer.innerHTML = "";
-countdown();
 var questions = quizquestions[curentQuestion];
 var qTitle = document.createElement("h1");
 qTitle.textContent= questions.question;
@@ -77,6 +79,7 @@ questionsConainer.appendChild(qTitle);
 for (var i = 0; i < questions.answers.length; i++){
 var answersbuttons = document.createElement("button");
 answersbuttons.setAttribute('id','button'+i);
+answersbuttons.setAttribute('class','button-A');
 answersbuttons.textContent = questions.answers[i];
 questionsConainer.appendChild(answersbuttons);
     answersbuttons.addEventListener("click",function(){
@@ -84,16 +87,17 @@ questionsConainer.appendChild(answersbuttons);
             score++;
             BeginGameButton.innerHTML = "NEXT";
             resultsContainer.innerHTML = "THAT IS CORRECT! YOU NO HAVE  "+score +" CORRECT ANSWERS.";
+            timeLeft = timeLeft + addTime;
             
         }else {
             removeTime-=10;
             BeginGameButton.innerHTML = "NEXT";
             resultsContainer.innerHTML = "THAT IS NOT CORRECT!";
-            
+           return timeLeft; 
         }
     })
 
-    
+   
 answersbuttons.textContent = questions.answers[i];
 questionsConainer.appendChild(answersbuttons);
 
@@ -111,10 +115,12 @@ function endGame(){
     resultsContainer.innerHTML = "";
     resultsContainer.innerHTML = "You got "+ score +" correct awnsers.";
 }
+countdown()
+
+
 
 function countdown() {
-    var timeLeft = 60;
-  
+    
     // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
     var timeInterval = setInterval(function () {
       // As long as the `timeLeft` is greater than 1

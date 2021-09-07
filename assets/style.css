@@ -15,3 +15,11 @@ h1 {
 .countDown {
     font-size: 24px;
 }
+
+.button-A{
+    border: solid 2px;
+    padding: 2px;
+    margin: 4px;
+    font-size: medium;
+   border-radius: 8px;
+}

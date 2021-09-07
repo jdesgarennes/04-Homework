@@ -77,33 +77,35 @@ questionsConainer.appendChild(qTitle);
 
 // loop to display all questions inarray.
 for (var i = 0; i < questions.answers.length; i++){
-var answersbuttons = document.createElement("button");
-answersbuttons.setAttribute('id','button'+i);
-answersbuttons.setAttribute('class','button-A');
-answersbuttons.textContent = questions.answers[i];
-questionsConainer.appendChild(answersbuttons);
+    var answersbuttons = document.createElement("button");
+    answersbuttons.setAttribute('id','button'+i);
+    answersbuttons.setAttribute('class','button-A');
+    answersbuttons.textContent = questions.answers[i];
+    questionsConainer.appendChild(answersbuttons);
     answersbuttons.addEventListener("click",function(){
         if(questions.correctAnswer=== this.textContent){
             score++;
             BeginGameButton.innerHTML = "NEXT";
-            resultsContainer.innerHTML = "THAT IS CORRECT! YOU NO HAVE  "+score +" CORRECT ANSWERS.";
+            resultsContainer.innerHTML = "THAT IS CORRECT! YOU NOW HAVE  "+score +" CORRECT ANSWERS.";
             timeLeft = timeLeft + addTime;
             
         }else {
-            removeTime-=10;
+            
             BeginGameButton.innerHTML = "NEXT";
             resultsContainer.innerHTML = "THAT IS NOT CORRECT!";
-           return timeLeft; 
+           
         }
+         
+        
     })
 
    
-answersbuttons.textContent = questions.answers[i];
-questionsConainer.appendChild(answersbuttons);
+    answersbuttons.textContent = questions.answers[i];
+    questionsConainer.appendChild(answersbuttons);
 
 
-}
-curentQuestion ++;
+    }
+    curentQuestion ++;
 }
 
 BeginGameButton.addEventListener("click",beginGame);
@@ -115,7 +117,8 @@ function endGame(){
     resultsContainer.innerHTML = "";
     resultsContainer.innerHTML = "You got "+ score +" correct awnsers.";
 }
-countdown()
+countdown();
+
 
 
 
@@ -136,7 +139,11 @@ function countdown() {
       } else {
         // Once `timeLeft` gets to 0, set `timerEl` to an empty string
         timeClock.textContent = '';
+        
+        resultsContainer.innerHTML = "YOU RAN OUT OF TIME, PLEASE TRY AGAIN.";
+    
         // Use `clearInterval()` to stop the timer
+
         clearInterval(timeInterval);
         
       }

@@ -4,9 +4,10 @@ var BeginGameButton = document.querySelector("#start");
 var restartGameButton = document.querySelector('#restart');
 var resultsContainer = document.querySelector('#result-box');
 var score =0;
-var timeLeft=10; 
+var timeLeft=20; 
 var removeTime = 0;
 var addTime = 10;
+var removeTime = 10;
 var timeClock =document.querySelector('#timer');
 
 // Create a array of objexts that contain all possible questions with awnser Keys.
@@ -89,25 +90,20 @@ questionsConainer.appendChild(qTitle);
     answersbuttons.addEventListener("click",function(){
         
         
-        
         if(questions.correctAnswer=== this.textContent && timeLeft > 1){
             score++;
             BeginGameButton.innerHTML = "NEXT";
-            
             resultsContainer.innerHTML = "THAT IS CORRECT! YOU NOW HAVE  "+score +" CORRECT ANSWERS.";
-            timeLeft = timeLeft + addTime;
             
             
         } else if(timeLeft <1){
             noTime();
-           
-            
+             
         } 
         else {
             BeginGameButton.innerHTML = "NEXT";
-            resultsContainer.innerHTML = "THAT IS NOT CORRECT!";
-            
-
+            resultsContainer.innerHTML = "THAT IS NOT CORRECT!"; 
+            timeLeft = timeLeft - removeTime;
         }
         
         console.log(timeLeft);

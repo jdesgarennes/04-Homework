@@ -1,9 +1,10 @@
 
 var questionsConainer = document.querySelector("#questions-box");
 var BeginGameButton = document.querySelector("#start");
+var restartGameButton = document.querySelector('#restart');
 var resultsContainer = document.querySelector('#result-box');
 var score =0;
-var timeLeft=60; 
+var timeLeft=10; 
 var removeTime = 0;
 var addTime = 10;
 var timeClock =document.querySelector('#timer');
@@ -65,72 +66,87 @@ var quizquestions = [
 
 var curentQuestion =0;
 // The Begin game function that start the game and validates input.
-
+//restartGameButton.style.display='none';
+countdown()
 function beginGame () {
 // next line clears out text box.    
 questionsConainer.innerHTML = "";
 resultsContainer.innerHTML = "";
+
 var questions = quizquestions[curentQuestion];
 var qTitle = document.createElement("h1");
 qTitle.textContent= questions.question;
 questionsConainer.appendChild(qTitle);
-
-// loop to display all questions inarray.
-for (var i = 0; i < questions.answers.length; i++){
+ // loop to display all questions inarray.
+ for (var i = 0; i < questions.answers.length; i++){
     var answersbuttons = document.createElement("button");
     answersbuttons.setAttribute('id','button'+i);
     answersbuttons.setAttribute('class','button-A');
     answersbuttons.textContent = questions.answers[i];
     questionsConainer.appendChild(answersbuttons);
+    answersbuttons.textContent = questions.answers[i];
+    questionsConainer.appendChild(answersbuttons);
     answersbuttons.addEventListener("click",function(){
-        if(questions.correctAnswer=== this.textContent){
+        
+        
+        
+        if(questions.correctAnswer=== this.textContent && timeLeft > 1){
             score++;
             BeginGameButton.innerHTML = "NEXT";
+            
             resultsContainer.innerHTML = "THAT IS CORRECT! YOU NOW HAVE  "+score +" CORRECT ANSWERS.";
             timeLeft = timeLeft + addTime;
             
-        }else {
             
+        } else if(timeLeft <1){
+            noTime();
+           
+            
+        } 
+        else {
             BeginGameButton.innerHTML = "NEXT";
             resultsContainer.innerHTML = "THAT IS NOT CORRECT!";
-           
+            
+
         }
-         
+        
+        console.log(timeLeft);
+        
         
     })
-
    
-    answersbuttons.textContent = questions.answers[i];
-    questionsConainer.appendChild(answersbuttons);
-
-
     }
     curentQuestion ++;
+   
 }
 
 BeginGameButton.addEventListener("click",beginGame);
+restartGameButton.addEventListener("click",resetgame);
+function noTime(){
+    questionsConainer.innerHTML = "";
+    BeginGameButton.style.display='none';
+    resultsContainer.innerHTML = "YOU RAN OUT OF TIME :( PLEASE TRY AGAIN."; 
+}
 
-
-
+function resetgame(){
+    window.location.reload();
+    return;
+};
 function endGame(){
     questionsConainer.innerHTML = "";
     resultsContainer.innerHTML = "";
     resultsContainer.innerHTML = "You got "+ score +" correct awnsers.";
-}
-countdown();
-
-
-
+};
 
 function countdown() {
     
-    // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+    
     var timeInterval = setInterval(function () {
-      // As long as the `timeLeft` is greater than 1
+     
       if (timeLeft > 1) {
-        // Set the `textContent` of `timerEl` to show the remaining seconds
+        
         timeClock.textContent = timeLeft + ' seconds remaining';
-        // Decrement `timeLeft` by 1
+       
         timeLeft--;
       } else if (timeLeft === 1) {
         // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
@@ -139,13 +155,14 @@ function countdown() {
       } else {
         // Once `timeLeft` gets to 0, set `timerEl` to an empty string
         timeClock.textContent = '';
-        
-        resultsContainer.innerHTML = "YOU RAN OUT OF TIME, PLEASE TRY AGAIN.";
+        //endGame()
+        //resultsContainer.innerHTML = "YOU RAN OUT OF TIME, PLEASE TRY AGAIN.";
     
         // Use `clearInterval()` to stop the timer
 
         clearInterval(timeInterval);
         
       }
+      return timeLeft;
     }, 1000);
   }

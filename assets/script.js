@@ -142,6 +142,7 @@ function resetgame(){
 };
 function endGame(){
     questionsConainer.innerHTML = "";
+    BeginGameButton.style.display='none';
     timeLeft = 0;
     resultsContainer.innerHTML = "You got "+ score +" correct awnsers.";
     highScore();
@@ -170,7 +171,7 @@ function countdown() {
   function highScore(){
     var myHighScores = document.querySelector('#Highscoreblock');
     myHighScores.style.display='block';
-    document.getElementById('yourScore').innerHTML=document.getElementById('initialsInput').value + '     and your score was: ' + score ;
+    document.getElementById('yourScore').innerHTML=document.getElementById('initialsInput').value + '      :Your score was: ' + score ;
     event.preventDefault(); 
 
   }

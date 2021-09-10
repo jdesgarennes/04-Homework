@@ -32,7 +32,7 @@ var quizquestions = [
         answers: ["A: To make code more difficult.", "B: To make the program run faster.", "C: To make loops", "D: To make code easier to read."],
         correctAnswer: "D: To make code easier to read.",
     },
-    /*
+    
     {
         question: "Question FIVE: What does .createElement Do?",
         answers: ["A: Creates faster pages.", "B: Method creates the HTML element specified by tagName.", "C: changes chemestry of page.", "D: This is not a valid method."],
@@ -60,10 +60,10 @@ var quizquestions = [
     },
     {
         question: "Question TEN: What does IMMUTABLE mean",
-        answers: ["A: Makes answers un readable", "B: Means it cannot be changed", "C: Makes others work more tollerable.", "D: Allows you to chnge values."],
+        answers: ["A: Makes answers un readable", "B: Means it cannot be changed", "C: Makes others work more tollerable.", "D: Allows you to change values."],
         correctAnswer: "B: Means it cannot be changed",
     },
-    */
+    
 ];
 
 
@@ -142,7 +142,6 @@ function resetgame(){
 };
 function endGame(){
     questionsConainer.innerHTML = "";
-    //resultsContainer.innerHTML = "";
     timeLeft = 0;
     resultsContainer.innerHTML = "You got "+ score +" correct awnsers.";
     
@@ -153,23 +152,15 @@ function countdown() {
     
     
     var timeInterval = setInterval(function () {
-     
       if (timeLeft > 1) {
-        
         timeClock.textContent = timeLeft + ' seconds remaining';
-       
         timeLeft--;
       } else if (timeLeft === 1) {
-        
         timeClock.textContent = timeLeft + ' second remaining';
         timeLeft--;
       } else {
-       
         timeClock.textContent = '';
-        
-
         clearInterval(timeInterval);
-        
       }
       return timeLeft;
     }, 1000);

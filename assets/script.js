@@ -144,7 +144,7 @@ function endGame(){
     questionsConainer.innerHTML = "";
     timeLeft = 0;
     resultsContainer.innerHTML = "You got "+ score +" correct awnsers.";
-    
+    highScore();
 
 };
 
@@ -164,4 +164,13 @@ function countdown() {
       }
       return timeLeft;
     }, 1000);
+  }
+
+
+  function highScore(){
+    var myHighScores = document.querySelector('#Highscoreblock');
+    myHighScores.style.display='block';
+    document.getElementById('yourScore').innerHTML=document.getElementById('initialsInput').value + '     and your score was: ' + score ;
+    event.preventDefault(); 
+
   }

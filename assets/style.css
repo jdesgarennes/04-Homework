@@ -20,6 +20,7 @@ h1 {
 }
 
 .results{
+    
     font-size: large;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -37,4 +38,16 @@ h1 {
     margin: 4px;
     font-size: medium;
    border-radius: 8px;
+}
+
+.high-score{
+    display: none;
+}
+
+#final-score{
+
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    size:24px;
+    align-content: center;
+    
 }
